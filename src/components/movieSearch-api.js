@@ -37,14 +37,14 @@ export const searchMovies = async (query, page) => {
 
 export const castMovies = async (id) => {
     const response = await axios.get(`/movie/${id}/credits?`, options);
-    console.log(response.data);
+    
   return response.data
   
 };
 
 export const reviewsMovies = async (id) => {
     const response = await axios.get(`/movie/${id}/reviews?`, options);
-    console.log(response.data);
+    
   return response.data
   
 };

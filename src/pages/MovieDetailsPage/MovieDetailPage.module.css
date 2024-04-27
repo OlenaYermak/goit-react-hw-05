@@ -85,3 +85,8 @@ color: #9f9f9f;
     flex-direction: column;
     justify-content: space-between;
 }
+
+.icon{
+    color: #ca563f;
+    font-size: 45px;
+}

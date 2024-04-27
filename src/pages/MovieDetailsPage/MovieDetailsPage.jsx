@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
-import { useParams,  NavLink, Outlet } from "react-router-dom";
+import { useState, useEffect, useRef, Suspense } from "react";
+import { useParams,  NavLink, Outlet,  useLocation, Link } from "react-router-dom";
 import { detailsMovies } from "../../components/movieSearch-api";
+import { TbSquareArrowLeft } from "react-icons/tb";
 
 import Loader from "../../components/Loader/Loader";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
@@ -8,13 +9,18 @@ import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import css from "./MovieDetailPage.module.css"
 
 
+const defaultImg =
+  "https://dl-media.viber.com/10/share/2/long/vibes/icon/image/0x0/95e0/5688fdffb84ff8bed4240bcf3ec5ac81ce591d9fa9558a3a968c630eaba195e0.jpg";
+
 export default function MovieDetailsPage() {
     const {movieId} = useParams();
-    console.log(movieId);
+  
 
     const [dataMovies, setDataMovies] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
+    const location = useLocation();
+  const backLinkRef = useRef(location.state ?? "/movies");
 
     useEffect(() => {
         async function getMDetailMovies() {
@@ -22,7 +28,7 @@ export default function MovieDetailsPage() {
                 setLoading(true);
                 const movies = await detailsMovies(movieId);
             setDataMovies(movies);
-            console.log(movies);
+            
                 
             } catch (error) {
                 setError(true);  
@@ -40,8 +46,13 @@ const genres = dataMovies.genres || [];
     return (<>
         {loading && <Loader />}
         {error ? <ErrorMessage /> : <div className={css.container}>
-         <img className={css.img}
-                src={`https://image.tmdb.org/t/p/w500${dataMovies.poster_path}`}
+            <Link className={css.link} to={backLinkRef.current}>
+               <TbSquareArrowLeft className={css.icon} />
+            </Link>
+            <img className={css.img}
+                
+                 src={dataMovies.poster_path ? `https://image.tmdb.org/t/p/w500${dataMovies.poster_path}` : defaultImg}
+                
                 alt={`${dataMovies.title} poster`}
                 width={400}
                 height={650}
@@ -107,7 +118,9 @@ const genres = dataMovies.genres || [];
        
         </div>
         </div>}
-       <Outlet />
+        <Suspense fallback={<Loader/>}>
+            <Outlet />
+            </Suspense>
         </>
         
     )

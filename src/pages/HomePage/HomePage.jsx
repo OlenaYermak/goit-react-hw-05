@@ -18,7 +18,7 @@ export default function HomePage() {
                 setLoading(true);
                 const movies = await trendingMovies();
             setDataMovies(movies);
-            console.log(movies);
+           
                 
             } catch (error) {
                 setError(true);  

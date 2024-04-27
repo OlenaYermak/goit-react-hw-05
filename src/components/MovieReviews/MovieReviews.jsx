@@ -25,7 +25,7 @@ const {movieId} = useParams();
                 setLoading(true);
                 const data = await reviewsMovies(movieId);
             setDataReviews(data.results);
-            console.log(data);
+           
                 
             } catch (error) {
                 setError(true);  
