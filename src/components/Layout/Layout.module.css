@@ -1,0 +1,12 @@
+.container{
+    padding-left: 15px;
+        padding-right: 15px;
+    margin: 0 auto;
+    background-color: #121314;
+}
+
+.header{
+    background-color: black;
+    padding: 20px;
+    
+}

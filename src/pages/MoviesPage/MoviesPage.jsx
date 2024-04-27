@@ -1,0 +1,108 @@
+import { useState, useEffect } from "react";
+import { Formik, Form, Field } from "formik"
+import toast, { Toaster } from 'react-hot-toast';
+
+
+import {searchMovies} from "../../components/movieSearch-api"
+
+import css from "./MoviesPage.module.css"
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
+import MovieList from "../../components/MovieList/MovieList";
+import Loader from "../../components/Loader/Loader";
+import LoadMoreBtn from "../../components/LoadMoreBtn/LoadMoreBtn"
+
+export default function MoviesPage() {
+
+      const [dataMovies, setDataMovies] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
+    const [query, setQuery] = useState("");
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
+
+
+
+    const handleSubmit = async (query) => {
+    setQuery(query);
+    setTotalPages(0);
+    setDataMovies([]);
+    setPage(1);
+        setError(false);
+        
+    
+  };
+
+  const handleLoadMore = () => {
+    setPage(page + 1);
+  };
+
+    useEffect(() => {
+        if (query === "") return;
+
+        async function getMovies() {
+            try {
+                setLoading(true);
+                const data = await searchMovies(query, page);
+                setDataMovies(prevDataMovies => {
+                    return [...prevDataMovies, ...data.results]
+                }
+                );
+                setTotalPages(data.total_pages);
+
+            } catch (error) {
+                setError(true);
+            } finally {
+                setLoading(false);
+            }
+        }
+        getMovies();
+    }, [page, query]);
+
+
+ return (<>
+         <Formik
+        initialValues={{ query: "" }} onSubmit={(values, actions) => {
+          if (values.query.trim() === "") {
+            toast.error("Please  enter data to search.", {
+  autoClose: 1500
+});
+            return;
+          }
+          handleSubmit(values.query);
+          actions.resetForm();
+        }}
+      >
+        {({ values }) => (
+          <Form className={css.form}>
+            <Field className={css.fieldInput}
+              type="text"
+              name="query"
+              autoComplete="off"
+              autoFocus
+              placeholder="Search movie"
+            />
+            <button className={css.btnSearch} type="submit">Search</button>
+            {values.query.trim() === "" && <Toaster />}
+          </Form>
+        )}
+        </Formik>
+        
+        {error ? dataMovies.length > 0 &&  <ErrorMessage /> : <MovieList movies={dataMovies} /> }
+     {loading && <Loader />}
+      {dataMovies.length > 0 && page< totalPages && !loading && <LoadMoreBtn onLoadMore={handleLoadMore} />}
+    </>
+        
+    
+    )
+}
+
+
+
+
+
+
+
+
+
+
+

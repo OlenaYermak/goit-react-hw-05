@@ -1,0 +1,15 @@
+.loadMoreBtn {
+    border-radius: 8px;
+    background: #ca563f;
+    color: #fff;
+    font-family: Montserrat, sans-serif;
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: .04em;
+    padding: 8px 16px;
+    height: 40px;
+    border: none;
+    width: 125px;
+    margin: 0 auto;
+    display: block;
+}

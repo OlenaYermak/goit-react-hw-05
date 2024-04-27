@@ -1,0 +1,18 @@
+.nav{
+    display: flex;
+    gap: 25px;
+}
+
+.link{
+    font-size: 30px;
+    color: #fafafa;
+}
+.link:hover{
+    color: #ca563f;
+    text-decoration:underline;
+}
+
+.active {
+    color: #ca563f;
+    text-decoration: none;
+}

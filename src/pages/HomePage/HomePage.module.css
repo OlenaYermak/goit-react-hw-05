@@ -1,0 +1,9 @@
+.sectionTitle{
+    color: #dcaab3;
+        font-size: 36px;
+        text-transform: capitalize;
+        text-align: center;
+        line-height: 1.11;
+        letter-spacing: 0.02em;
+        margin: 36px 0;
+}

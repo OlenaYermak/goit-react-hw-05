@@ -1,0 +1,39 @@
+.movieList {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 18px;
+    row-gap: 28px;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 1572px;
+    padding-left: 0;
+    list-style-type: none;
+    margin-bottom: 20px;
+}
+
+.movieListItem {
+    box-sizing: border-box;
+    width: calc((100% - 4* 18px) / 5);
+   
+}
+
+.movieNameTitle{
+  
+        margin-top: 5px;
+     text-align: center;
+        font-weight: 700;
+        font-size: 24px;
+        color: #9f9f9f;
+}
+
+.link{
+    transition: transform 0.3s ease-in-out;
+}
+.movieListItem:hover {
+    transform: scale(1.1);
+}
+
+.img{
+border-radius: 10px;
+    overflow: hidden;
+}

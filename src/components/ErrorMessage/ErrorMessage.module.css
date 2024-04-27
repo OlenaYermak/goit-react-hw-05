@@ -1,0 +1,14 @@
+.errorWrapper{
+    margin: 0 auto;
+        width: 400px;
+}
+
+.errorText{
+    color: red;
+    font-size: 20px;
+        font-family: Montserrat, sans-serif;
+        font-weight: 500;
+        line-height: 1.5;
+        letter-spacing: .04em;
+        text-align: center;
+}
