@@ -11,7 +11,7 @@ import css from "./MovieReviews.module.css"
 export default function MovieReviews() {
 
 const {movieId} = useParams();
-    console.log(movieId);
+   
 
 
 
@@ -43,7 +43,7 @@ const {movieId} = useParams();
         {loading && <Loader />}
         {error && <ErrorMessage/>}
        
-        {dataReviews.length > 0 && (
+        {dataReviews.length > 0 ? (
         <ul className={css.reviewsList}>
           {dataReviews.map((review) => (
             <li key={review.id}>
@@ -52,9 +52,12 @@ const {movieId} = useParams();
             </li>
           ))}
         </ul>
+      ) : (
+        <h3 className={css.castTitle}>There is no information</h3>
       )}
     </div>
        
 
     )
 };
+

@@ -12,7 +12,7 @@ const defaultImg =
 export default function MovieCast() {
 
 const {movieId} = useParams();
-    console.log(movieId);
+   
 
 
 
@@ -26,7 +26,7 @@ const {movieId} = useParams();
                 setLoading(true);
                 const data = await castMovies(movieId);
             setDataCast(data.cast);
-            console.log(data);
+            
                 
             } catch (error) {
                 setError(true);  
