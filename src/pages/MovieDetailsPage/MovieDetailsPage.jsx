@@ -40,7 +40,7 @@ export default function MovieDetailsPage() {
         }
     
         getMDetailMovies();
-    }, []);
+    }, [movieId]);
     
 const genres = dataMovies.genres || [];
     return (<>
